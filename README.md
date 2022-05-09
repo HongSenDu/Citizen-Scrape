@@ -1,6 +1,6 @@
 # Citizen Scraper
 
-Citizen scraper allows users to explore citizen data directly within a google colab instance. Users are able to search data by location, category and severity. Clicking on an incident will show more information about the incident, pull in updates, and showcase similar incidents based on location and time. The goal of this interactive colab is to present another data source to journalists to cover events. Many of these incidents provide video data and images that can be referred to when covering crime occurrences for more journalism organizations focused on local news.
+Citizen scraper allows users to explore citizen data directly within a google colab instance. Users are able to search data by location, category and severity. Clicking on an incident will show more information about the incident, pull in updates, and showcase similar incidents based on location and time. The goal of this interactive colab is to present another data source to journalists to explore and cover potentially interesting events. Many of these incidents provide video data and images that can be referred to by journalism organizations focused on local news when covering crime occurrences.
 
 ## Methodology
 The scraper endpoints were found by going to the [citizen explore site](https://citizen.com/explore) and looking through the network activity. By combing through the network calls, I found that Citizen has API endpoints that are called in order to present data on the front-end, but Citizen does not provide a public API for its users. After looking through a few endpoints, I summed up most of the functionality below:
@@ -44,8 +44,11 @@ We create these widgets and hook up the handlers to them. This allows us to only
 
 This section presents a box layout of the widgets to be on one row. Additionally, we display the table output whose output is determined by the widgets. Here, I present the two display options: Groupable Data Table and HTML rendering. Both of these have their pros and cons which I wanted to discuss.
 - Groupable Data Table
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This is the colab `data_table`. This option presents the data in a pretty neat table with indexes. By clicking on the headers, users are allowed to sort the data based on the column values. This allows for powerful exploration of the data and paired with the category and neighborhood widgets, allows for quick movement through the data. However, customization for the `data_table` is pretty difficult. There is not much documentation on it so it is difficult to define additional customizations on top of the table, so most of what is displayed is determined by the predefined functionality of the `data_table`.
+
 - HTML Rendering
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTML Rendering renders the dataframe to HTML using the `dataframe_html_string` in the Formatters section. Here, we are able to customize the table by defining styling and javascript functionality that allows for more customization. We were also able to run formatters through the dataframe to convert links to hyperlinks and image links to the actual images. However, the con is that these HTML formats are hard to search through, but with additional javascript functionality, they can be customized further. However, this requires more work and there are not many predefined features.
 
 ### Output
@@ -70,6 +73,7 @@ Scrolling down to `updates_output`, they read through the updates to the situati
 
 ## Word about ipywidgets
 I decided to go with colab because of the power of ipywidgets. Through only a few function definitions, ipywidgets allows users to interact with the data directly through the extensive list of widgets and display options. This leads to an user experience built entirely within the notebook that can be easily shared and iterated upon. It is great for proof of concept work that other developers can then examine while seeing the outputs directly on the same tab. Colab's ability to render HTML also provides an endless number of opportunities to add interactables through javascript.
+
 Most of the interactive elements I implemented in this notebook is fairly experimental. I could not find any previous examples of making pandas dataframes themselves clickable, but I was able to figure it out by rendering HTML with embedded javascript. I also used output widgets in a unique way that get rendered by a python function attached to each row using javascript. To do this, I used `google.colab.kernel.invokeFunction` which allows notebook functions to be called in embedded code. More information about this can be found [here](https://colab.research.google.com/github/ektaarora3501/tensorflow/blob/master/advanced_outputs.ipynb). 
 
 ## Future Work

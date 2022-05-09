@@ -2,6 +2,9 @@
 
 Citizen scraper allows users to explore citizen data directly within a google colab instance. Users are able to search data by location, category and severity. Clicking on an incident will show more information about the incident, pull in updates, and showcase similar incidents based on location and time. The goal of this interactive colab is to present another data source to journalists to explore and cover potentially interesting events. Many of these incidents provide video data and images that can be referred to by journalism organizations focused on local news when covering crime occurrences.
 
+
+Right now, the colab can be accessed by navigating to the `citizen_scrape.ipynb` file and clicking on the `Open In Colab` button at the top. This will spin up a local instance of the colab that you can edit in any way you want.
+
 ## Methodology
 The scraper endpoints were found by going to the [citizen explore site](https://citizen.com/explore) and looking through the network activity. By combing through the network calls, I found that Citizen has API endpoints that are called in order to present data on the front-end, but Citizen does not provide a public API for its users. After looking through a few endpoints, I summed up most of the functionality below:
 

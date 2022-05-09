@@ -52,7 +52,7 @@ This section presents a box layout of the widgets to be on one row. Additionally
 Output hosts the `info_output`, `updates_output`, `videos_output` and `similar_output` which are filled on_click of the HTML rendered dataframe in Interactables. `info_output` presents the fields and values of the incident in a vertical view for easy lookup. `updates_output` presents the updates of the incident in a table. `videos_output` grabs all the video data and presents it in a easy to view table. Lastly, `similar_output` presents in a datatable incidents similar to the searched incident. Here, I used the same `dataframe_to_string` so this dataframe is also clickable to render more incidents to this output section.
 
 
-### User Walkthrough
+## User Walkthrough
 Here, the user is on the data explorer on the groupable data table
 ![alt text](images/data_table.png)
 They may want to sort by a category, lets say `Missing Person`. They are presented with the data sorted only by that category
@@ -68,11 +68,11 @@ Scrolling down to `updates_output`, they read through the updates to the situati
 `similar_output` presents them with a list of similar incidents across locations. Clicking on any of these will allow them to rerender the display area and explore the data again
 ![alt text](images/similar_output.png)
 
-### Word about ipywidgets
+## Word about ipywidgets
 I decided to go with colab because of the power of ipywidgets. Through only a few function definitions, ipywidgets allows users to interact with the data directly through the extensive list of widgets and display options. This leads to an user experience built entirely within the notebook that can be easily shared and iterated upon. It is great for proof of concept work that other developers can then examine while seeing the outputs directly on the same tab. Colab's ability to render HTML also provides an endless number of opportunities to add interactables through javascript.
 Most of the interactive elements I implemented in this notebook is fairly experimental. I could not find any previous examples of making pandas dataframes themselves clickable, but I was able to figure it out by rendering HTML with embedded javascript. I also used output widgets in a unique way that get rendered by a python function attached to each row using javascript. To do this, I used `google.colab.kernel.invokeFunction` which allows notebook functions to be called in embedded code. More information about this can be found [here](https://colab.research.google.com/github/ektaarora3501/tensorflow/blob/master/advanced_outputs.ipynb). 
 
-### Future Work
+## Future Work
 For a computational journalism tool to be useful, it must satisfy these major categories: proximity, prominence, timeliness and relevance, novelty, human interest, and surprise
 
 In terms of proximity, prominence, timeliness and relevance, I chose to emphasize these by allowing users to sort by location, neighborhood, and severity, displaying those with highest number of notified users to the user first. Hopefully, human interest may be sparked by being able to explore an incident more through its updates and video data.
@@ -81,7 +81,7 @@ However, right now, it is difficult to comb through the thousands of incidents t
 
 Additionally, to place the incidents in a wider context in terms of trends, additional statistics can be displayed to the reader including number of similar incidents over time compared to other years and cities. Right now, I could not find a way to sort incidents between dates without having to manually collect data over time, but this ability would allow for greater analysis by grabbing data from any time period in citizen history. I have confirmed that old incidents are still viewable if you know the ID, but they are hidden from search calls to the API. According to [this article](https://www.vice.com/en/article/pkbg89/hacker-hacktivist-citizen-app-scrape-dark-web), it seems like this should be possible, so further experimentation has to be done on my end. 
 
-### Research Done
+## Research Done
 Throughout the semester, I combined most of my research into one google document. I made it viewable by all Columbia email users and it can be found [here](https://docs.google.com/document/d/1JfjuDfwODZVikj3G2yaywOIeQaScOjbo_O40IaKg6vs/edit?usp=sharing). Thank you Lydia Chilton, Savvas Petridis, and Jason Kao for all your advice and feedback this semester! :)
 
 

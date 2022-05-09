@@ -53,26 +53,36 @@ Output hosts the `info_output`, `updates_output`, `videos_output` and `similar_o
 
 
 ### User Walkthrough
+Here, the user is on the data explorer on the groupable data table
 ![alt text](images/data_table.png)
+They may want to sort by a category, lets say `Missing Person`. They are presented with the data sorted only by that category
 ![alt text](images/data_table_sort.png)
+To view in HTML Rendering, they use the display option to switch to `HTML Rendering`. Here, all links and images are rendered completely.
 ![alt text](images/html_table.png)
+They click on `Man Critically Shot Two Women` and scroll down to the display section. They are presented with the output in a vertical format
 ![alt text](images/info_output.png)
+Scrolling down to `updates_output`, they read through the updates to the situation
 ![alt text](images/updates_output.png)
+`videos_output` takes the videos from the incident and displays them as videos that can be played directly into the colab. Here, this incident had around 10 videos
 ![alt text](images/videos_output.png)
+`similar_output` presents them with a list of similar incidents across locations. Clicking on any of these will allow them to rerender the display area and explore the data again
 ![alt text](images/similar_output.png)
 
+### Word about ipywidgets
+I decided to go with colab because of the power of ipywidgets. Through only a few function definitions, ipywidgets allows users to interact with the data directly through the extensive list of widgets and display options. This leads to an user experience built entirely within the notebook that can be easily shared and iterated upon. It is great for proof of concept work that other developers can then examine while seeing the outputs directly on the same tab. Colab's ability to render HTML also provides an endless number of opportunities to add interactables through javascript.
+Most of the interactive elements I implemented in this notebook is fairly experimental. I could not find any previous examples of making pandas dataframes themselves clickable, but I was able to figure it out by rendering HTML with embedded javascript. I also used output widgets in a unique way that get rendered by a python function attached to each row using javascript. To do this, I used `google.colab.kernel.invokeFunction` which allows notebook functions to be called in embedded code. More information about this can be found [here](https://colab.research.google.com/github/ektaarora3501/tensorflow/blob/master/advanced_outputs.ipynb). 
 
 ### Future Work
 For a computational journalism tool to be useful, it must satisfy these major categories: proximity, prominence, timeliness and relevance, novelty, human interest, and surprise
 
-In terms of proximity, prominence, timeliness and relevance, I chose to emphasize these by allowing users to sort by location, neighborhood, and severity, displaying those with highest number of notified users to the user first. 
+In terms of proximity, prominence, timeliness and relevance, I chose to emphasize these by allowing users to sort by location, neighborhood, and severity, displaying those with highest number of notified users to the user first. Hopefully, human interest may be sparked by being able to explore an incident more through its updates and video data.
 
-Right now, it is difficult to comb through the thousands of incidents to target those that spark human interest or surprise. Additional NLP analysis can be done on the titles and updates provided by incidents to target those that might provide the most shock or spark the most curiosity by a user.
+However, right now, it is difficult to comb through the thousands of incidents to target those that spark human interest or surprise. Additional NLP analysis can be done on the titles and updates provided by incidents to target those that might provide the most shock or spark the most curiosity by a user.
 
 Additionally, to place the incidents in a wider context in terms of trends, additional statistics can be displayed to the reader including number of similar incidents over time compared to other years and cities. Right now, I could not find a way to sort incidents between dates without having to manually collect data over time, but this ability would allow for greater analysis by grabbing data from any time period in citizen history. I have confirmed that old incidents are still viewable if you know the ID, but they are hidden from search calls to the API. According to [this article](https://www.vice.com/en/article/pkbg89/hacker-hacktivist-citizen-app-scrape-dark-web), it seems like this should be possible, so further experimentation has to be done on my end. 
 
 ### Research Done
-Throughout the semester, I combined most of my research into one google document. All Columbia email users are able to access it: [Doc](https://docs.google.com/document/d/1JfjuDfwODZVikj3G2yaywOIeQaScOjbo_O40IaKg6vs/edit?usp=sharing). Thank you Lydia Chilton, Sylas
+Throughout the semester, I combined most of my research into one google document. I made it viewable by all Columbia email users and it can be found [here](https://docs.google.com/document/d/1JfjuDfwODZVikj3G2yaywOIeQaScOjbo_O40IaKg6vs/edit?usp=sharing). Thank you Lydia Chilton, Savvas Petridis, and Jason Kao for all your advice and feedback this semester! :)
 
 
 

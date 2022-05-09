@@ -9,16 +9,20 @@ The scraper endpoints were found by going to the [citizen explore site](https://
 - Incidents can be found at the `https://citizen.com/api/incident/` endpoint and stats can be pulled by attaching a `/stats` route at the end of it.
 - Searches can be done through `https://citizen.com/api/incident/search?` and by attaching query parameters. 
 	- To search by terms, attach `?q={your_search_term}`. This is able to search by both title, category, and cityCode.
-	- To search by location, add bounding boxes that are in the form of `?insideBoundingBox[0]={latitude[0]}&insideBoundingBox[2]={latitude[1]}&insideBoundingBox[1]={longitude[0]}&insideBoundingBox[3]={longitude[1]}` as a query parameter
-
+- In addition, you can also search by trending incidents through `https://citizen.com/api/incident/trending?`
+	- To search by location, add bounding boxes using query params in the form of `?insideBoundingBox[0]={latitude[0]}&insideBoundingBox[2]={latitude[1]}&insideBoundingBox[1]={longitude[0]}&insideBoundingBox[3]={longitude[1]}`
+An example endpoint would be:
+```
+https://citizen.com/api/incident/trending?lowerLatitude=40.25119636738148&lowerLongitude=-74.28919064777256&upperLatitude=41.199425961910805&upperLongitude=-73.64280935222831
+```
 ## Code Walkthrough
 I broke up the colab code into 7 main sections: Scrape functions, Scraping by location, Display, Formatters, Data Handling and Display, Interactables, and Output.
 
 ### Scrape Functions
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Scrape Functions section holds most of the scraping capability using the endpoints. I tried making these functions in a way where they gave the user freedom in using them. Here, we have functions that are able to sort by location, keywords, and terms as well as sort data based on category, updates, and by relevant fields. The citizen API returns data for a ton of fields that consist of mostly metadata, so we can define a series of categories that we are interested in that are returned. We also scrape by interesting categories which are defined at the top.
+The Scrape Functions section holds most of the scraping capability using the endpoints. I tried making these functions in a way where they gave the user freedom in using them. Here, we have functions that are able to sort by location, keywords, and terms as well as sort data based on category, updates, and by relevant fields. The citizen API returns data for a ton of fields that consist of mostly metadata, so we can define a series of categories that we are interested in that are returned. We also scrape by interesting categories which are defined at the top.
 
 ### Scraping by location
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Here, we do an example by scraping by incidents with the city code `nyc`. We are automatically sorting by red severity in order to filter out small unconfirmed reports on citizen. We sort by the relevant fields defined at the top of the colab and sort by usersNotified in order to get the incidents with the highest relevance and coverage first as determined by citizen. We store this data in a pandas dataframe.
+Here, we do an example by scraping by incidents with the city code `nyc`. We are automatically sorting by red severity in order to filter out small unconfirmed reports on citizen. We sort by the relevant fields defined at the top of the colab and sort by usersNotified in order to get the incidents with the highest relevance and coverage first as determined by citizen. We store this data in a pandas dataframe.
 
 ### Display
 This section was used to import most of the libaries that build the interactive and display part of the colab. I opted to go with `ipywidgets` because of their flexibility. `ipywidgets` provides support for an [extensive number of interactive widgets](https://ipywidgets.readthedocs.io/en/latest/examples/Widget%20List.html) that can be used to interact with the data. It also allows the widgets to be displayed in a format that is up to the developer, allowing for customization and styling.
@@ -45,7 +49,18 @@ This section presents a box layout of the widgets to be on one row. Additionally
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HTML Rendering renders the dataframe to HTML using the `dataframe_html_string` in the Formatters section. Here, we are able to customize the table by defining styling and javascript functionality that allows for more customization. We were also able to run formatters through the dataframe to convert links to hyperlinks and image links to the actual images. However, the con is that these HTML formats are hard to search through, but with additional javascript functionality, they can be customized further. However, this requires more work and there are not many predefined features.
 
 ### Output
-Output hosts the `info_output`, `updates_output`, and `similar_output` which are filled on_click of the HTML rendered dataframe in Interactables. `info_output` presents the fields and values of the incident in a vertical view for easy lookup. `updates_output` presents the updates of the incident in a table. Lastly, `similar_output` presents in a datatable incidents similar to the searched incident. Here, I used the same `dataframe_to_string` so this dataframe is also clickable to render more incidents to this output section.
+Output hosts the `info_output`, `updates_output`, `videos_output` and `similar_output` which are filled on_click of the HTML rendered dataframe in Interactables. `info_output` presents the fields and values of the incident in a vertical view for easy lookup. `updates_output` presents the updates of the incident in a table. `videos_output` grabs all the video data and presents it in a easy to view table. Lastly, `similar_output` presents in a datatable incidents similar to the searched incident. Here, I used the same `dataframe_to_string` so this dataframe is also clickable to render more incidents to this output section.
+
+
+### User Walkthrough
+![alt text](images/data_table.png)
+![alt text](images/data_table_sort.png)
+![alt text](images/html_table.png)
+![alt text](images/info_output.png)
+![alt text](images/updates_output.png)
+![alt text](images/videos_output.png)
+![alt text](images/similar_output.png)
+
 
 ### Future Work
 For a computational journalism tool to be useful, it must satisfy these major categories: proximity, prominence, timeliness and relevance, novelty, human interest, and surprise
